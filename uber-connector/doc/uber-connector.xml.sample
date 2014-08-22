@@ -1,0 +1,6 @@
+<!-- BEGIN_INCLUDE(uber:myProcessor) -->
+    <uber:my-processor content="#[map-payload:content]" />
+<!-- END_INCLUDE(uber:myProcessor) -->
+<!-- BEGIN_INCLUDE(uber:query) -->
+    <uber:query query="SELECT fieldName FROM MY_TABLE" />
+<!-- END_INCLUDE(uber:query) -->

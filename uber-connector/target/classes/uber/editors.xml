@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" url="http://www.mulesoft.org/schema/mule/uber" prefix="uber">
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Uber" description="" icon="" localId="parentConfig" image="" abstract="true" extends="http://www.mulesoft.org/schema/mule/uber/abstractUberConnectorGeneric"></global-cloud-connector>
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Uber" description="Global Uber configuration information." icon="icons/small/uber-connector-24x16.png" localId="config" image="icons/large/uber-connector-48x32.png" abstract="false" extends="http://www.mulesoft.org/schema/mule/uber/parentConfig" connectivityTesting="on" metaData="dynamic">
+    <attribute-category caption="General" description="Uber configuration properties.">
+      <group id="uberGenericProperties" caption="Basic Settings">
+        <name name="name" caption="Name" description="Give a name to this configuration so it can be later referenced by config-ref." required="true"></name>
+      </group>
+      <group id="general" caption="General">
+        <useMetaData name="useMetaData" caption="useMetaData"></useMetaData>
+        <string defaultValue="value" name="clientId" caption="Client Id" description="" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="value" name="secret" caption="Secret" description="" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="value" name="serverToken" caption="Server Token" description="" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="https://api.uber.com" name="serviceUrl" caption="Service Url" description="Configurable." required="false" javaType="java.lang.String"></string>
+        <string defaultValue="v1" name="versionId" caption="Version Id" description="" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector caption="Abstractuberconnectorgeneric" description="Interact with Uber." icon="icons/small/uber-connector-24x16.png" localId="abstractUberConnectorGeneric" image="icons/large/uber-connector-48x32.png" abstract="true">
+    <attribute-category caption="General" description="General.">
+      <group id="abstractUberConnectorGeneric" caption="Basic Settings">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/uber/config" name="config-ref" caption="Connector Configuration" description="Specify which configuration to use for this invocation." required="true"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector versions="[3.5.0,8.0.0]" aliasId="org.mule.tooling.ui.modules.core.pattern.uber" caption="Uber" description="Anypoint Connector." icon="icons/small/uber-connector-24x16.png" localId="uber-connector" image="icons/large/uber-connector-48x32.png" extends="http://www.mulesoft.org/schema/mule/uber/abstractUberConnectorGeneric">
+    <attribute-category caption="General" description="General.">
+      <group id="uberConnectorGeneric" caption="Basic Settings">
+        <modeSwitch alwaysCombo="true" name="Uber operations to execute" caption="Operation" description="Operation.">
+          <no-operation abstractElement="http://www.mulesoft.org/schema/mule/uber/abstractUberConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
+          <mode modeId="http://www.mulesoft.org/schema/mule/uber/get-estimated-price" modeLabel="Get estimated price"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/uber/get-estimated-time" modeLabel="Get estimated time"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/uber/get-products" modeLabel="Get products"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/uber/query" modeLabel="Query"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" caption="Get Estimated Price" icon="icons/small/uber-connector-24x16.png" localId="get-estimated-price" image="icons/large/uber-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/uber/abstractUberConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <element-controller-map mapName="coordinates" localName="get-estimated-price-coordinates" itemName="coordinate" defaultValue="#[payload]" caption="Lat/Long" description="" required="false" javaType="java.util.Map&lt;java.lang.String,java.lang.Double&gt;"></element-controller-map>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" caption="Get Estimated Time" icon="icons/small/uber-connector-24x16.png" localId="get-estimated-time" image="icons/large/uber-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/uber/abstractUberConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <element-controller-map mapName="coordinates" localName="get-estimated-time-coordinates" itemName="coordinate" defaultValue="#[payload]" caption="Lat/Long" description="" required="false" javaType="java.util.Map&lt;java.lang.String,java.lang.Double&gt;"></element-controller-map>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" caption="Get Products" icon="icons/small/uber-connector-24x16.png" localId="get-products" image="icons/large/uber-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/uber/abstractUberConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <element-controller-map mapName="coordinates" localName="get-products-coordinates" itemName="coordinate" defaultValue="#[payload]" caption="Lat/Long" description="" required="false" javaType="java.util.Map&lt;java.lang.String,java.lang.Double&gt;"></element-controller-map>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.util.List&lt;java.lang.Object&gt;" caption="Query" icon="icons/small/uber-connector-24x16.png" localId="query" image="icons/large/uber-connector-48x32.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/uber/abstractUberConnectorGeneric" metaData="dynamic">
+    <attribute-category caption="General" description="General.">
+      <group id="query" caption="Query">
+        <element-query associatedConfig="config-ref" andOperator="enabled" orOperator="enabled" nativeQuery="disabled" limit="enabled" offset="enabled" orderBy="enabled" name="query" caption="Query" description="The dsql query." supportsExpressions="true" required="true" javaType="java.lang.String"></element-query>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>

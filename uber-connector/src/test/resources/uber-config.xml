@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:uber="http://www.mulesoft.org/schema/mule/uber"
+      xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/uber http://www.mulesoft.org/schema/mule/uber/1.0/mule-uber.xsd">
+
+    <uber:config name="Uber" serverToken="IzWnaI8B9iJJgWr3MILLfwNAJ8pgFaxAq4-Lip0j"/>
+
+    <flow name="testProducts">
+		<set-payload value="#[['latitude':35.2143084, 'longitude':-80.9434066]]"/>
+        <uber:get-products config-ref="Uber">
+            <uber:coordinates ref="#[payload]"/>
+        </uber:get-products>
+    </flow>
+
+    <flow name="testEstimatedPrice">
+		<set-payload value="#[['start_latitude':35.2143084, 'start_longitude':-80.9434066, 'end_latitude':35.173540, 'end_longitude':-80.657030]]"/>
+        <uber:get-estimated-price config-ref="Uber">
+            <uber:coordinates ref="#[payload]"/>
+        </uber:get-estimated-price>
+    </flow>
+
+    <flow name="testEstimatedTime">
+		<set-payload value="#[['start_latitude':35.2143084, 'start_longitude':-80.9434066, 'end_latitude':35.173540, 'end_longitude':-80.657030]]"/>
+        <uber:get-estimated-time config-ref="Uber">
+            <uber:coordinates ref="#[payload]"/>
+        </uber:get-estimated-time>
+    </flow>
+
+</mule>
